@@ -127,7 +127,9 @@ def load_test_dataset(N=100, NP=200, s=0, sp=4000):
     obs_rep = np.zeros((N, 28), dtype=np.float32)
     k = 0
     for i in range(s, s + N):
+        i = i + 29901
         temp = np.fromfile('/home/muhayyuddin/MPNet/MPNet/dataset/obs_cloud/obc' + str(i) + '.dat')
+        print(i)
         temp = temp.reshape(len(temp) // 2, 2)
         obstacles = np.zeros((1, 2800), dtype=np.float32)
         obstacles[0] = temp.flatten()

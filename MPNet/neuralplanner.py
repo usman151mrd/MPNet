@@ -21,6 +21,10 @@ if torch.cuda.is_available():
 
 #load test dataset
 obc,obstacles, paths, path_lengths= load_test_dataset() 
+print(type(obc),obc.shape)
+print(type(obstacles),obstacles.shape)
+print(type(paths),paths.shape)
+print(type(path_lengths),path_lengths.shape)
 
 def IsInCollision(x,idx):
 	s=np.zeros(2,dtype=np.float32)
