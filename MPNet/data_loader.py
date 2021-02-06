@@ -38,7 +38,7 @@ def load_dataset(N=100, NP=4000):  # N=100, NP=4000
         # import os
         # print(os.getcwd())
         #  os.system('pwd')
-        temp = np.fromfile('/home/muhayyuddin/MPNet/MPNet/dataset/obs_cloud/obc' + str(i) + '.dat')
+        temp = np.fromfile('/home/muhayy/MPNet/MPNet/dataset/obs_cloud/obc' + str(i) + '.dat')
         temp = temp.reshape(len(temp) // 2, 2)
         obstacles = np.zeros((1, 2800), dtype=np.float32)
         obstacles[0] = temp.flatten()
@@ -107,10 +107,10 @@ def load_dataset(N=100, NP=4000):  # N=100, NP=4000
 # seen_environments==> N=100, NP=200,s=0, sp=4000
 def load_test_dataset(N=100, NP=200, s=0, sp=4000):
     obc = np.zeros((N, 7, 2), dtype=np.float32)
-    temp = np.fromfile('/home/muhayyuddin/MPNet/MPNet/dataset/obs.dat')
+    temp = np.fromfile('/home/muhayy/MPNet/MPNet/dataset/obs.dat')
     obs = temp.reshape(len(temp) // 2, 2)
 
-    temp = np.fromfile('//home/muhayyuddin/MPNet/MPNet/dataset/obs_perm2.dat', np.int32)
+    temp = np.fromfile('/home/muhayy/MPNet/MPNet/dataset/obs_perm2.dat', np.int32)
     perm = temp.reshape(77520, 7)
 
     ## loading obstacles
@@ -128,7 +128,7 @@ def load_test_dataset(N=100, NP=200, s=0, sp=4000):
     k = 0
     for i in range(s, s + N):
         i = i + 29901
-        temp = np.fromfile('/home/muhayyuddin/MPNet/MPNet/dataset/obs_cloud/obc' + str(i) + '.dat')
+        temp = np.fromfile('/home/muhayy/MPNet/MPNet/dataset/obs_cloud/obc' + str(i) + '.dat')
         print(i)
         temp = temp.reshape(len(temp) // 2, 2)
         obstacles = np.zeros((1, 2800), dtype=np.float32)
