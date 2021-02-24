@@ -1,9 +1,14 @@
+import sys
+
 import matplotlib
 # matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import struct
 import numpy as np
 import argparse
+
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QMainWindow, QApplication
 
 
 def main(args):
@@ -29,12 +34,44 @@ def main(args):
     plt.show()
 
 
-parser = argparse.ArgumentParser()
-# for training
-parser.add_argument('--obs_file', type=str, default='/home/muhayyuddin/MPNet/MPNet/dataset/obs_cloud/obc0.dat',
-                    help='obstacle point cloud file')
-parser.add_argument('--path_file', type=str, default='./results/env_0/path_0.txt', help='path file')
+class Main(QMainWindow):
+    def __init__(self):
+        QMainWindow.__init__(self)
 
-args = parser.parse_args()
-print(args)
-main(args)
+    def open_obstacle(self):
+        options = QtWidgets.QFileDialog.Options()
+        options |= QtWidgets.QFileDialog.DontUseNativeDialog
+        fileName, _ = QtWidgets.QFileDialog.getOpenFileName(
+            None,
+            "Select your Environment",
+            "",
+            "All Files (*);;Image Files (*.dat)",
+            options=options)
+        return fileName
+
+    def open_path(self):
+        options = QtWidgets.QFileDialog.Options()
+        options |= QtWidgets.QFileDialog.DontUseNativeDialog
+        fileName, _ = QtWidgets.QFileDialog.getOpenFileName(
+            None,
+            "Select your Path",
+            "",
+            "All Files (*);;Image Files (*.txt)",
+            options=options)
+        return fileName
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    # for training
+    app = QApplication([])
+    window = Main()
+    window.show()
+    parser.add_argument('--obs_file', type=str, default=window.open_obstacle(),
+                        help='obstacle point cloud file')
+    parser.add_argument('--path_file', type=str, default=window.open_path(), help='path file')
+
+    args = parser.parse_args()
+    print(args)
+    main(args)
+    sys.exit(app.exec_())
